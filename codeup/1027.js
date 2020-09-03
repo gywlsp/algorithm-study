@@ -12,10 +12,10 @@ require("readline")
       input[0]
         .split(".")
         .reverse()
-        .map((numString, index) => {
-          if (index === 2) return "0".repeat(4 - numString.length) + numString;
-          return "0".repeat(2 - numString.length) + numString;
-        })
+        .map(
+          (numString, index) =>
+            "0".repeat((index === 2 ? 4 : 2) - numString.length) + numString
+        )
         .join("-")
     );
   });
