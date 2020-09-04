@@ -11,13 +11,9 @@ require("readline")
     let result = "";
     const n = Number(input[0]);
     let q = n;
-    while (true) {
+    while (q !== 0) {
       result = (q % 8) + result;
       q = Math.floor(q / 8);
-      if (q < 8) {
-        result = q + result;
-        break;
-      }
     }
     console.log(result);
   });
