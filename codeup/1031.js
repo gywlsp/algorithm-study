@@ -8,12 +8,5 @@ require("readline")
     input.push(line.trim());
   })
   .on("close", function () {
-    let result = "";
-    const n = Number(input[0]);
-    let q = n;
-    while (q !== 0) {
-      result = (q % 8) + result;
-      q = Math.floor(q / 8);
-    }
-    console.log(result);
+    console.log(Number(input[0]).toString(8));
   });
