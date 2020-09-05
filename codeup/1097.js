@@ -1,4 +1,4 @@
-//https://codeup.kr/problem.php?id=1096
+//https://codeup.kr/problem.php?id=1097
 
 let input = [];
 
