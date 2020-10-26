@@ -13,8 +13,7 @@ require("readline")
     let inputIndex = 0;
     const t = Number(input[inputIndex++]);
     for (let i = 0; i < t; i++) {
-      let startSurrounded = 0,
-        endSurrounded = 0;
+      let count = 0;
       const positions = input[inputIndex++]
         .split(" ")
         .map(element => Number(element));
@@ -29,10 +28,8 @@ require("readline")
         const endD = Math.sqrt(
           Math.pow(endX - cx, 2) + Math.pow(endY - cy, 2)
         );
-        if (startD < r && endD < r) continue;
-        if (startD < r) startSurrounded++;
-        if (endD < r) endSurrounded++;
+        if ((startD < r && endD > r) || (startD > r && endD < r)) count++;
       }
-      console.log(startSurrounded + endSurrounded);
+      console.log(count);
     }
   });
