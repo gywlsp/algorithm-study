@@ -1,12 +1,12 @@
-//https://www.acmicpc.net/problem/2759
+//https://www.acmicpc.net/problem/2579
 
 let input = [];
-let inputIndex = 0;
-let numbers = [];
-let memo;
+let n, numbers, memo;
 
 const solve = (i) => {
-    if (i < 0) return 0;
+    if (i < 0) {
+      return 0;
+    };
   
     if (memo[i]) {
       return memo[i];
@@ -23,14 +23,10 @@ require("readline")
     input.push(line.trim());
   })
   .on("close", function () {
-    const N = Number(input[inputIndex++]);
-    memo = Array.apply(null, Array(N));
-
-    let t = N;
-    while (t--) numbers.push(Number(input[inputIndex++]));
-
-    memo[0] = numbers[0];
-    solve(N - 1);
+    [n, ...numbers] = input.map(numString => Number(numString));
     
-    console.log(memo[N - 1]);
+    memo = [...Array(n)];
+    memo[0] = numbers[0];
+
+    console.log(solve(n - 1));
   });
