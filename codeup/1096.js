@@ -24,7 +24,7 @@ const result = [...Array(19)].map(() => [
   0,
 ]);
 
-const strToNumArr = (str) => str.split(" ").map((numChar) => Number(numChar));
+const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
 
 require("readline")
   .createInterface(process.stdin, process.stdout)

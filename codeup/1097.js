@@ -8,7 +8,7 @@ const toggle = (x, y) => {
 
 const result = [];
 
-const strToNumArr = (str) => str.split(" ").map((numChar) => Number(numChar));
+const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
 
 require("readline")
   .createInterface(process.stdin, process.stdout)

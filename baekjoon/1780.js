@@ -2,7 +2,7 @@
 
 const input = [];
 
-const strToNumArr = (str) => str.split(" ").map((numChar) => Number(numChar));
+const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
 const result = [0, 0, 0];
 
 const explore = (paper, len, rs, cs) => {
