@@ -1,6 +1,6 @@
 //기본 양식
 
-let input = [];
+const input = [];
 
 require("readline")
   .createInterface(process.stdin, process.stdout)

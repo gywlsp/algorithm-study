@@ -1,6 +1,6 @@
 //https://www.acmicpc.net/problem/1463
 
-let input = [];
+const input = [];
 let memo;
 
 require("readline")

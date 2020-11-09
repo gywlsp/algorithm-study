@@ -1,6 +1,6 @@
 //https://www.acmicpc.net/problem/2156
 
-let input = [];
+const input = [];
 
 const setMaxAmount = (amount_list, dp, i) => {
     dp[i] = Math.max(

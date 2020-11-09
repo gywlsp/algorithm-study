@@ -1,6 +1,6 @@
 //https://www.acmicpc.net/problem/12846
 
-let input = [];
+const input = [];
 let result = 0;
 
 const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));

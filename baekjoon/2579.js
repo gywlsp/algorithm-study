@@ -1,6 +1,6 @@
 //https://www.acmicpc.net/problem/2579
 
-let input = [];
+const input = [];
 let n, numbers, memo;
 
 const solve = (i) => {

@@ -1,6 +1,6 @@
 //https://codeup.kr/problem.php?id=1097
 
-let input = [];
+const input = [];
 
 const toggle = (x, y) => {
   result[x][y] = result[x][y] === 0 ? 1 : 0;

@@ -1,6 +1,6 @@
 //https://codeup.kr/problem.php?id=1024
 
-let input = [];
+const input = [];
 
 require("readline")
   .createInterface(process.stdin, process.stdout)

@@ -1,6 +1,6 @@
 //https://codeup.kr/problem.php?id=1096
 
-let input = [];
+const input = [];
 
 const result = [...Array(19)].map(() => [
   0,
