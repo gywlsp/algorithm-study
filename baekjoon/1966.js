@@ -4,9 +4,11 @@ const input = [];
 let inputIndex = 0;
 
 const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
-const getNumIndexArrayList = (str) => str.split(" ").map((numString, index) => ([Number(numString), index]));
 
-const getMaxNum = (numIndexArrayList) => Math.max(...numIndexArrayList.map((numIndexArray)=>numIndexArray[0]));
+const getNumIndexArrayQueue = (str) => str.split(" ").map((numString, index) => ([Number(numString), index]));
+
+const getMaxNum = (numIndexArrayQueue) => Math.max(...numIndexArrayQueue.map((numIndexArray)=>numIndexArray[0]));
+
 
 require("readline")
   .createInterface(process.stdin, process.stdout)
@@ -17,21 +19,21 @@ require("readline")
     let t = Number(input[inputIndex++]);
     while(t--){
         const [N, M] = strToNumArr(input[inputIndex++]);
-        const numIndexArrayList = getNumIndexArrayList(input[inputIndex++]);
+        const queue = getNumIndexArrayQueue(input[inputIndex++]);
     
-        let currentNum, currentNumIndex, maxNum;
+        let currentNum, currentInitialIndex, maxNum;
         let result = 0;
         while(true){
-            const currentNumIndexArray = numIndexArrayList.shift();
-            [currentNum, currentNumIndex] = currentNumIndexArray;
-            maxNum = getMaxNum(numIndexArrayList);
+            const current = queue.shift();
+            [currentNum, currentInitialIndex] = current;
+            maxNum = getMaxNum(queue);
 
             if(currentNum < maxNum){
-                numIndexArrayList.push(currentNumIndexArray);
+                queue.push(current);
             }
             if(currentNum >= maxNum){
                 result++;
-                if(currentNumIndex === M){
+                if(currentInitialIndex === M){
                     break;
                 }
             }
