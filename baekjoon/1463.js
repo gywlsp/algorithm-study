@@ -13,9 +13,8 @@ require("readline")
     memo = [...Array(N+1)];
 
     memo[1] = 0;
-    memo[2] = 1;
 
-    for(let i=3; i<=N; i++){
+    for(let i=2; i<=N; i++){
         prevNumbers = [i-1];
         if(i%2===0) {prevNumbers.push(i/2);}
         if(i%3===0) {prevNumbers.push(i/3);}
