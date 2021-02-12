@@ -1,7 +1,7 @@
 //https://www.acmicpc.net/problem/12846
 
 const input = [];
-let result = 0;
+const stack = [];
 
 const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
 
@@ -11,21 +11,16 @@ require("readline")
     input.push(line.trim());
   })
   .on("close", function () {
-    const N = Number(input[0]);
-    const DAILY_PAY_LIST = strToNumArr(input[1]);
+    const PAY_LIST = strToNumArr(input[1]+" 0");
 
-    let todayPay, day, dailyPay;
-    DAILY_PAY_LIST.push(0);
-    const stack = [[0, DAILY_PAY_LIST[0]]];
-
-    for(let i=1; i<=N; i++){
-      todayPay = DAILY_PAY_LIST[i];
-      while(stack.length!==0 && stack[stack.length-1][1]>todayPay){
-        [day, dailyPay] = stack.pop();
-        result = Math.max(result, dailyPay*(i-day));
-      }
-      stack.push([i, todayPay]);
+    let result = 0;
+    for(let i=0; i<PAY_LIST.length; i++){
+        while(stack.length!==0 && PAY_LIST[i]<PAY_LIST[stack[stack.length-1]]){
+            const j = stack.pop();
+            const width = stack.length===0? i : i-stack[stack.length-1]-1;
+            result = Math.max(result, PAY_LIST[j]*width);
+        }
+        stack.push(i);
     }
-
     console.log(result);
   });
