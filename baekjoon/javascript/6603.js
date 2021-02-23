@@ -2,7 +2,7 @@
 
 const input = [];
 
-const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
+const strToNumArr = (str) => str.split(" ").map(Number);
 
 const getCombinations = function (arr, selectNum) {
   const results = [];

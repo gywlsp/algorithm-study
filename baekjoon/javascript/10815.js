@@ -3,7 +3,7 @@
 const input = [];
 let numList = undefined;
 
-const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
+const strToNumArr = (str) => str.split(" ").map(Number);
 
 const binarySearch = (num, startIndex, endIndex) => {
   if (endIndex < startIndex) return false;

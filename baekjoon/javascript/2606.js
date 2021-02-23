@@ -4,7 +4,7 @@ const input = [];
 //그래프, 방문 여부, 결과값 담는 변수
 let graph, visited, result=0;
 
-const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
+const strToNumArr = (str) => str.split(" ").map(Number);
 
 require("readline")
   .createInterface(process.stdin, process.stdout)

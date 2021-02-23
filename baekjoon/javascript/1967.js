@@ -2,30 +2,10 @@
 
 const input = [];
 let tree;
-let visited;
+let longest = 0;
 
-let result = 0;
-let endNode = 0;
-
-const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
-
-const dfs = (node, len) => {
-    if(visited[node]){
-        return;
-    }
-
-    visited[node] = true;
-    if(len>result){
-        result = len;
-        endNode = node;
-    }
-
-    for(let i=0; i<tree[node].length; i++){
-        dfs(tree[node][i][0], tree[node][i][1]+len);
-    }
-
-};
-
+const strToNumArr = (str) =>
+  str.split(" ").map(Number);
 
 require("readline")
   .createInterface(process.stdin, process.stdout)
@@ -34,20 +14,33 @@ require("readline")
   })
   .on("close", function () {
     const N = Number(input.shift());
-    tree = [...Array(N+1)].map(()=>[]);
-    visited = [...Array(N+1)].fill(false);
+    tree = [...Array(N + 1)].map(() => []);
     let parent, child, len;
-    input.forEach((str)=>{
-        [parent, child, len] = strToNumArr(str);
-        tree[parent].push([child, len]);
-        tree[child].push([parent, len]);
-    })
+    input.forEach((str) => {
+      [parent, child, len] = strToNumArr(str);
+      tree[parent].push([child, len]);
+    });
 
-    dfs(1,0);
-    
-    result=0;
-    visited.fill(false);
-    dfs(endNode, 0);
-
-    console.log(result);
+    const height = getHeight(1);
+    console.log(Math.max(height, longest));
   });
+
+const getHeight = (root) => {
+  const subTrees = tree[root].map(([node, value]) => [
+    node,
+    getHeight(node),
+    value,
+  ]);
+  subTrees.sort((a, b) => (b[1] + b[2]) - (a[1] + a[2]));
+
+  if (subTrees.length === 0) {
+    return 0;
+  }
+  if (subTrees.length >= 2) {
+    longest = Math.max(
+      longest,
+      subTrees[0][1] + subTrees[0][2] + subTrees[1][1] + subTrees[1][2]
+    );
+  }
+  return subTrees[0][1] + subTrees[0][2];
+};

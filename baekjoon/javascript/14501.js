@@ -3,7 +3,7 @@
 const input = [];
 let dDay, schedule, memo;
 
-const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
+const strToNumArr = (str) => str.split(" ").map(Number);
 
 require("readline")
   .createInterface(process.stdin, process.stdout)

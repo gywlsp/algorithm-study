@@ -6,7 +6,7 @@ let inputIndex = 0;
 const distances = [[-1, 0], [1, 0], [0, -1], [0, 1]];
 let graph, columnCount, rowCount, cabbageCount, result=0;
 
-const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
+const strToNumArr = (str) => str.split(" ").map(Number);
 
 const bfs = (rStart, cStart) => {
     const queue = [[rStart, cStart]];

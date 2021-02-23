@@ -1,6 +1,6 @@
 const input = [];
 const strToNumArr = (str) =>
-  str.split(" ").map((numString) => Number(numString));
+  str.split(" ").map(Number);
 
 require("readline")
   .createInterface(process.stdin, process.stdout)
@@ -9,7 +9,7 @@ require("readline")
   })
   .on("close", function () {
     const [N, K] = strToNumArr(input.shift());
-    const values = input.map((v) => Number(v));
+    const values = input.map(Number);
 
     let k = K,
       v,

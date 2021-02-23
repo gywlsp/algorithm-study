@@ -3,7 +3,7 @@
 const input = [];
 let lis = [];
 
-const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
+const strToNumArr = (str) => str.split(" ").map(Number);
 
 const getLisIndex = (num, start, end) => {
   if (start >= end) return end;

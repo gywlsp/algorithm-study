@@ -1,7 +1,7 @@
 //https://www.acmicpc.net/problem/1010
 
 const input = [];
-const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
+const strToNumArr = (str) => str.split(" ").map(Number);
 
 const getFactorial = n => {
     return (n===0? 1 : n * getFactorial(n - 1));

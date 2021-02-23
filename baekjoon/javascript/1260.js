@@ -3,7 +3,7 @@
 const input = [];
 let graph, visited, result;
 
-const strToNumArr = (str) => str.split(" ").map((numString) => Number(numString));
+const strToNumArr = (str) => str.split(" ").map(Number);
 
 const dfs = (v) => {
     if(visited[v]){
