@@ -1,5 +1,4 @@
 const input = [];
-let n, numList, memo;
 
 const strToNumArr = (str) => str.split(" ").map(Number);
 
@@ -9,29 +8,17 @@ require("readline")
     input.push(line.trim());
   })
   .on("close", function () {
-    n = Number(input[0]);
-    numList = [0, ...strToNumArr(input[1])];
-    memo = [0, ...Array(n)];
+    const N = Number(input[0]);
+    const numList = strToNumArr(input[1]);
+    const memo = Array(N).fill(1);
 
-    for(let i=1; i<=n; i++){
-      lis(i);
-    }
+    numList.forEach((num, i) => {
+      for (let j = 0; j < i; j++) {
+        if (numList[j] < num) {
+          memo[i] = Math.max(memo[i], memo[j] + 1);
+        }
+      }
+    });
 
     console.log(Math.max(...memo));
   });
-
-const lis = (end) => {
-    let ret = memo[end];
-    if(ret!==undefined){
-      return ret;
-    }
-
-    ret=1;
-    for(let i=0; i<end; i++){
-      if(numList[i]<numList[end]){
-        ret=Math.max(ret, lis(i)+1);
-      }
-    }
-    memo[end]=ret;
-    return ret;
-};
