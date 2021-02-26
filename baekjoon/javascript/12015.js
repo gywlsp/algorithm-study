@@ -1,6 +1,7 @@
 const input = [];
-let n, numList, memo;
 
+const INF = 987654321;
+let numList, memo;
 const strToNumArr = (str) => str.split(" ").map(Number);
 
 require("readline")
@@ -9,45 +10,34 @@ require("readline")
     input.push(line.trim());
   })
   .on("close", function () {
-    n = Number(input[0]);
-    numList = [0, ...strToNumArr(input[1])];
-    memo = [0];
+    numList = strToNumArr(input[1]);
+    memo = [numList.shift()];
 
-    for(let i=1; i<=n; i++){
-      lis(i);
-    }
+    numList.forEach((num) => {
+      if (memo[memo.length - 1] < num) {
+        memo.push(num);
+        return;
+      }
+      memo[lowerBound(num)] = num;
+    });
 
-    console.log(memo.length-1);
+    console.log(memo.length);
   });
 
-const lis = (end) => {
-    const num = numList[end];
-    const maxLen = getMaxLen(num, 0, memo.length-1);
+const lowerBound = (num) => {
+  let start = 0,
+    end = memo.length - 1,
+    mid,
+    result = INF;
 
-    const len = maxLen+1;
-    if(memo[len]===undefined){
-        memo.push(num);
+  while (start <= end) {
+    mid = Math.floor((start + end) / 2);
+    if (memo[mid] < num) {
+      start = mid + 1;
+      continue;
     }
-    if(memo[len]>num){
-        memo[len]=num;
-    }
-};
-
-const getMaxLen = (num, start, end) => {
-    if(start>end){
-        return 0;
-    }
-    if(start===end){
-        return memo[start]>=num? 0: start;
-    }
-
-    const mid = Math.floor((start+end)/2);
-    let ret;
-    if(memo[mid]>=num){
-        ret = getMaxLen(num, start, mid-1);
-    }else{
-        ret = Math.max(mid, getMaxLen(num, mid+1, end));
-    }
-
-    return ret;
+    result = Math.min(result, mid);
+    end = mid - 1;
+  }
+  return result;
 };
