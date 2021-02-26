@@ -35,3 +35,6 @@ const upper_bound2 = (key) => {
 upper_bound1(0, numList.length - 1, 3);
 upper_bound2(3);
 console.log(result1, result2);
+
+//(+) 연속되는 숫자 중 가장 마지막 수의 위치 출력
+console.log(numList[result1 - 1] === 3 ? result1 - 1 : INF);
