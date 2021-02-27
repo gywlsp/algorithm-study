@@ -16,7 +16,7 @@ require("readline")
     mark[0][0] = 1;
     let r, c;
     while (queue.length !== 0) {
-      [r, c, depth] = queue.shift();
+      [r, c] = queue.shift();
 
       for (let i = 0; i < 4; i++) {
         let nextR = r + dr[i],
