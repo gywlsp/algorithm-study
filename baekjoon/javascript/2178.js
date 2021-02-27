@@ -19,7 +19,7 @@ require("readline")
       [r, c] = queue.shift();
 
       for (let i = 0; i < 4; i++) {
-        let nextR = r + dr[i],
+        const nextR = r + dr[i],
           nextC = c + dc[i];
         if (
           nextR < 0 ||
