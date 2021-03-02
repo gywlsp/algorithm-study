@@ -11,16 +11,16 @@ require("readline")
   })
   .on("close", function () {
     const [START, END] = strToNumArr(input[0]);
-    const visitedSet = Array(100001).fill(false);
+    const visited = Array(100001).fill(false);
 
     const queue = [[START, 0]];
     while (queue.length) {
       const [pos, t] = queue.shift();
-      if (visitedSet[pos]) {
+      if (visited[pos]) {
         continue;
       }
 
-      visitedSet[pos] = true;
+      visited[pos] = true;
       if (pos === END) {
         console.log(t);
         break;
