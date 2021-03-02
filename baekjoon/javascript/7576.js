@@ -28,18 +28,12 @@ require("readline")
         return ret;
       })
     );
-    const visited = [...Array(R)].map(() => Array(C).fill(false));
 
     let t = 0;
     const newRipeSet = new Set();
     while (true) {
       prevRipeList.forEach((pos) => {
         const [r, c] = strToNumArr(pos);
-        if (visited[r][c]) {
-          return;
-        }
-
-        visited[r][c] = true;
         drList.forEach((dr, i) => {
           const dc = dcList[i],
             nextR = r + dr,
@@ -49,12 +43,10 @@ require("readline")
             nextR >= R ||
             nextC < 0 ||
             nextC >= C ||
-            box[nextR][nextC] !== 0 ||
-            visited[nextR][nextC]
+            box[nextR][nextC] !== 0
           ) {
             return;
           }
-
           box[nextR][nextC] = 1;
           newRipeSet.add(`${nextR} ${nextC}`);
         });
