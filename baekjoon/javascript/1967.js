@@ -1,11 +1,9 @@
 //https://www.acmicpc.net/problem/1967
 
 const input = [];
-let tree;
-let longest = 0;
+let n, graph, dist;
 
-const strToNumArr = (str) =>
-  str.split(" ").map(Number);
+const strToNumArr = (str) => str.split(" ").map(Number);
 
 require("readline")
   .createInterface(process.stdin, process.stdout)
@@ -13,34 +11,33 @@ require("readline")
     input.push(line.trim());
   })
   .on("close", function () {
-    const N = Number(input.shift());
-    tree = [...Array(N + 1)].map(() => []);
-    let parent, child, len;
+    n = Number(input.shift());
+    graph = [...Array(n + 1)].map(() => []);
+    let u, v, w;
     input.forEach((str) => {
-      [parent, child, len] = strToNumArr(str);
-      tree[parent].push([child, len]);
+      [u, v, w] = strToNumArr(str);
+      graph[u].push([v, w]);
+      graph[v].push([u, w]);
     });
-
-    const height = getHeight(1);
-    console.log(Math.max(height, longest));
+    const height = getMaxDist(1);
+    const farthest = dist.indexOf(height);
+    const diameter = getMaxDist(farthest);
+    console.log(diameter);
   });
 
-const getHeight = (root) => {
-  const subTrees = tree[root].map(([node, value]) => [
-    node,
-    getHeight(node),
-    value,
-  ]);
-  subTrees.sort((a, b) => (b[1] + b[2]) - (a[1] + a[2]));
+const getMaxDist = (from) => {
+  const queue = [from];
+  dist = Array(n + 1).fill(-1);
+  dist[from] = 0;
 
-  if (subTrees.length === 0) {
-    return 0;
+  while (queue.length) {
+    const u = queue.shift();
+    graph[u].forEach(([v, w]) => {
+      if (dist[v] === -1) {
+        dist[v] = dist[u] + w;
+        queue.push(v);
+      }
+    });
   }
-  if (subTrees.length >= 2) {
-    longest = Math.max(
-      longest,
-      subTrees[0][1] + subTrees[0][2] + subTrees[1][1] + subTrees[1][2]
-    );
-  }
-  return subTrees[0][1] + subTrees[0][2];
+  return Math.max(...dist);
 };
