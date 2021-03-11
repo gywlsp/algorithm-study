@@ -12,24 +12,17 @@ require("readline")
   .on("close", function () {
     const [N, K] = strToNumArr(input.shift());
     const items = input.map((str) => strToNumArr(str));
-    items.unshift(undefined);
+    items.unshift(null);
 
-    const memo = [];
-    for (let i = 0; i <= N; i++) {
+    const memo = [Array(K + 1).fill(0)];
+    for (let n = 1; n <= N; n++) {
       memo.push(Array(K + 1).fill(0));
-    }
-
-    for (let i = 1; i <= N; i++) {
-      const [weight, value] = items[i];
+      const [weight, value] = items[n];
       for (let j = 0; j <= K; j++) {
-        if (j < weight) {
-          memo[i][j] = memo[i - 1][j];
-        } else {
-          memo[i][j] = Math.max(
-            memo[i - 1][j],
-            memo[i - 1][j - weight] + value
-          );
-        }
+        memo[n][j] =
+          j < weight
+            ? memo[n - 1][j]
+            : Math.max(memo[n - 1][j], memo[n - 1][j - weight] + value);
       }
     }
 
