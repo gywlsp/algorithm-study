@@ -5,10 +5,11 @@ let inputIndex = 0;
 
 const strToNumArr = (str) => str.split(" ").map(Number);
 
-const getNumIndexArrayQueue = (str) => str.split(" ").map((numString, index) => ([Number(numString), index]));
+const getNumIndexArrayQueue = (str) =>
+  str.split(" ").map((numString, index) => [Number(numString), index]);
 
-const getMaxNum = (numIndexArrayQueue) => Math.max(...numIndexArrayQueue.map((numIndexArray)=>numIndexArray[0]));
-
+const getMaxNum = (numIndexArrayQueue) =>
+  Math.max(...numIndexArrayQueue.map((numIndexArray) => numIndexArray[0]));
 
 require("readline")
   .createInterface(process.stdin, process.stdout)
@@ -17,28 +18,28 @@ require("readline")
   })
   .on("close", function () {
     let t = Number(input[inputIndex++]);
-    while(t--){
-        const [N, M] = strToNumArr(input[inputIndex++]);
-        const queue = getNumIndexArrayQueue(input[inputIndex++]);
-    
-        let currentNum, currentInitialIndex, maxNum;
-        let result = 0;
-        while(true){
-            const current = queue.shift();
-            [currentNum, currentInitialIndex] = current;
-            maxNum = getMaxNum(queue);
+    while (t--) {
+      const [N, M] = strToNumArr(input[inputIndex++]);
+      const queue = getNumIndexArrayQueue(input[inputIndex++]);
 
-            if(currentNum < maxNum){
-                queue.push(current);
-            }
-            if(currentNum >= maxNum){
-                result++;
-                if(currentInitialIndex === M){
-                    break;
-                }
-            }
+      let currentNum, currentInitialIndex, maxNum;
+      let result = 0;
+      while (true) {
+        const current = queue.shift();
+        [currentNum, currentInitialIndex] = current;
+        maxNum = getMaxNum(queue);
+
+        if (currentNum < maxNum) {
+          queue.push(current);
         }
+        if (currentNum >= maxNum) {
+          result++;
+          if (currentInitialIndex === M) {
+            break;
+          }
+        }
+      }
 
-        console.log(result);
+      console.log(result);
     }
   });

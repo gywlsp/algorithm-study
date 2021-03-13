@@ -12,21 +12,24 @@ require("readline")
   })
   .on("close", function () {
     dDay = Number(input.shift());
-    schedule = input.map((str)=>strToNumArr(str));
+    schedule = input.map((str) => strToNumArr(str));
     memo = [...Array(dDay)];
 
     console.log(getMaxPay(0));
   });
 
 const getMaxPay = (n) => {
-    if(n>=dDay){
-        return 0;
-    }
-    if(memo[n]!==undefined){
-        return memo[n];
-    }
-
-    const [t, p] = schedule[n];
-    memo[n] = Math.max(getMaxPay(n+1), n+t-1<dDay? p+getMaxPay(n+t): getMaxPay(n+t));
+  if (n >= dDay) {
+    return 0;
+  }
+  if (memo[n] !== undefined) {
     return memo[n];
+  }
+
+  const [t, p] = schedule[n];
+  memo[n] = Math.max(
+    getMaxPay(n + 1),
+    n + t - 1 < dDay ? p + getMaxPay(n + t) : getMaxPay(n + t)
+  );
+  return memo[n];
 };
