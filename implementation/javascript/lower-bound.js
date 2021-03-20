@@ -4,20 +4,20 @@ const INF = 987654321;
 let result1 = INF,
   result2 = INF;
 
-const lower_bound1 = (start, end, key) => {
+const lowerBound1 = (start, end, key) => {
   if (start > end) {
     return;
   }
   const mid = Math.floor((start + end) / 2);
   if (numList[mid] < key) {
-    lower_bound1(mid + 1, end, key);
+    lowerBound1(mid + 1, end, key);
     return;
   }
   result1 = Math.min(result1, mid);
-  lower_bound1(start, mid - 1, key);
+  lowerBound1(start, mid - 1, key);
 };
 
-const lower_bound2 = (key) => {
+const lowerBound2 = (key) => {
   let start = 0,
     end = numList.length - 1,
     mid;
@@ -32,6 +32,6 @@ const lower_bound2 = (key) => {
   }
 };
 
-lower_bound1(0, numList.length - 1, 3);
-lower_bound2(3);
+lowerBound1(0, numList.length - 1, 3);
+lowerBound2(3);
 console.log(result1, result2);
