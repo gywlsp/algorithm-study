@@ -8,12 +8,12 @@ const write = (num) => {
   memo[num] = memo[num - 1] + memo[num - 2] + memo[num - 3];
 };
 
-require('readline')
+require("readline")
   .createInterface(process.stdin, process.stdout)
-  .on('line', function (line) {
+  .on("line", function (line) {
     input.push(line.trim());
   })
-  .on('close', function () {
+  .on("close", function () {
     memo[1] = 1;
     memo[2] = 2;
     memo[3] = 4;

@@ -12,8 +12,8 @@ require("readline")
   .on("close", function () {
     const A = strToNumArr(input[1]).sort((a, b) => a - b);
     const B = strToNumArr(input[2]).sort((a, b) => b - a);
-    const result = A.reduce((acc, curr, index)=>{
-        return acc + curr * B[index]
+    const result = A.reduce((acc, curr, index) => {
+      return acc + curr * B[index];
     }, 0);
     console.log(result);
   });

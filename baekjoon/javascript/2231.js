@@ -17,7 +17,7 @@ require("readline")
       while (num !== 0) {
         remainder = num % 10;
         divideSum += remainder;
-        num = Math.floor(num/10);
+        num = Math.floor(num / 10);
       }
       if (divideSum === N) {
         result = n;

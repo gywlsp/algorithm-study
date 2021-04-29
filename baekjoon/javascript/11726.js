@@ -14,13 +14,13 @@ require("readline")
   });
 
 const getFillMethodCount = (n) => {
-    if(n<1){
-        return 0;
-    }
-    if(memo[n]){
-        return memo[n];
-    }
-
-    memo[n] = (getFillMethodCount(n-1) + getFillMethodCount(n-2))%10007;
+  if (n < 1) {
+    return 0;
+  }
+  if (memo[n]) {
     return memo[n];
-}
+  }
+
+  memo[n] = (getFillMethodCount(n - 1) + getFillMethodCount(n - 2)) % 10007;
+  return memo[n];
+};

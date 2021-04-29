@@ -61,6 +61,6 @@ require("readline")
       prevRipeList = Array.from(newRipeSet);
       newRipeSet.clear();
     }
-    
+
     console.log(ripeCount === tomatoCount ? t : -1);
   });

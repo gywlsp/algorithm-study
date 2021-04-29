@@ -49,6 +49,6 @@ require("readline")
         });
       }
     }
-    
+
     console.log(count + (N - connectedV.size));
   });

@@ -34,7 +34,7 @@ const merge = (numbers, start, mid, end) => {
       insertIndex++;
     }
   }
-  
+
   for (let k = start; k <= end; k++) {
     numbers[k] = sorted[k];
   }

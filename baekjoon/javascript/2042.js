@@ -17,17 +17,16 @@ class RangeSumTree {
     }
     const mid = Math.floor((rangeStart + rangeEnd) / 2);
     const leftRangeSum = this.init(numbers, nodeIndex * 2 + 1, rangeStart, mid);
-    const rightRangeSum = this.init(numbers, nodeIndex * 2 + 2, mid + 1, rangeEnd);
+    const rightRangeSum = this.init(
+      numbers,
+      nodeIndex * 2 + 2,
+      mid + 1,
+      rangeEnd
+    );
     return (this.rangeSum[nodeIndex] = leftRangeSum + rightRangeSum);
   };
 
-  query = (
-    from,
-    to,
-    nodeIndex = 0,
-    rangeStart = 0,
-    rangeEnd = this.n - 1
-  ) => {
+  query = (from, to, nodeIndex = 0, rangeStart = 0, rangeEnd = this.n - 1) => {
     if (from > rangeEnd || to < rangeStart) {
       return 0;
     }

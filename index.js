@@ -7,5 +7,4 @@ require("readline")
   .on("line", function (line) {
     input.push(line.trim());
   })
-  .on("close", function () {
-  });
+  .on("close", function () {});

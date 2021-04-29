@@ -13,18 +13,18 @@ require("readline")
     const N = Number(input[0]);
     memo = [0, ...Array(N)];
     const result = getMinBagCount(N);
-    console.log(result>INF ? -1 : result);
+    console.log(result > INF ? -1 : result);
   });
 
 const getMinBagCount = (n) => {
-    if(memo[n]!==undefined){
-        return memo[n];
-    }
-
-    if(n<3){
-        return INF;
-    }
-
-    memo[n] = 1 + Math.min(getMinBagCount(n-3), getMinBagCount(n-5));
+  if (memo[n] !== undefined) {
     return memo[n];
+  }
+
+  if (n < 3) {
+    return INF;
+  }
+
+  memo[n] = 1 + Math.min(getMinBagCount(n - 3), getMinBagCount(n - 5));
+  return memo[n];
 };

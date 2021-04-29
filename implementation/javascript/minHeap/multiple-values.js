@@ -39,7 +39,10 @@ class MinHeap {
       if (this.heap[nextI][0] > this.heap[leftI][0]) {
         nextI = leftI;
       }
-      if (rightI < this.heap.length && this.heap[nextI][0] > this.heap[rightI][0]) {
+      if (
+        rightI < this.heap.length &&
+        this.heap[nextI][0] > this.heap[rightI][0]
+      ) {
         nextI = rightI;
       }
       if (nextI === i) {

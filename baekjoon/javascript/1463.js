@@ -10,17 +10,21 @@ require("readline")
   })
   .on("close", function () {
     const N = Number(input[0]);
-    memo = [...Array(N+1)];
+    memo = [...Array(N + 1)];
 
     memo[1] = 0;
 
-    for(let i=2; i<=N; i++){
-        prevNumbers = [i-1];
-        if(i%2===0) {prevNumbers.push(i/2);}
-        if(i%3===0) {prevNumbers.push(i/3);}
+    for (let i = 2; i <= N; i++) {
+      prevNumbers = [i - 1];
+      if (i % 2 === 0) {
+        prevNumbers.push(i / 2);
+      }
+      if (i % 3 === 0) {
+        prevNumbers.push(i / 3);
+      }
 
-        memo[i] = Math.min(...prevNumbers.map(num => memo[num]))+1;
+      memo[i] = Math.min(...prevNumbers.map((num) => memo[num])) + 1;
     }
-    
+
     console.log(memo[N]);
   });

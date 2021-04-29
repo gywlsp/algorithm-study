@@ -73,7 +73,7 @@ require("readline")
       const jewerly = strToNumArr(input[inputIndex++]);
       jewerlies.push(jewerly);
     }
-    
+
     t = K;
     const bags = [];
     while (t--) {
@@ -87,14 +87,14 @@ require("readline")
     const pq = new MaxHeap();
     let result = 0,
       index = 0;
-    bags.forEach((bag)=>{
+    bags.forEach((bag) => {
       while (index < N && jewerlies[index][0] <= bag) {
         pq.push(jewerlies[index++][1]);
       }
       if (pq.getSize()) {
         result += pq.pop();
       }
-    })
+    });
 
     console.log(result);
   });

@@ -23,9 +23,9 @@ require("readline")
 
     const queue = [];
     for (let n = 1; n <= N; n++) {
-        if (!inDegrees[n]) {
-          queue.push(n);
-        }
+      if (!inDegrees[n]) {
+        queue.push(n);
+      }
     }
 
     const result = [];

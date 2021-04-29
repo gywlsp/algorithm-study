@@ -40,7 +40,7 @@ require("readline")
         if (!start) {
           break;
         }
-        
+
         count++;
         const queue = [start];
         visited[start[0]][start[1]] = true;

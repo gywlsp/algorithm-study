@@ -12,15 +12,15 @@ require("readline")
   })
   .on("close", function () {
     const [N, K] = strToNumArr(input[0]);
-    
-    const numList = [...Array(N)].map((_, i)=>i+1);
-    let indexArrow = 0;
-    const interval = K-1;
 
-    while(numList.length!==0){
-        indexArrow = (indexArrow+interval)%numList.length;
-        result.push(numList[indexArrow]);
-        numList.splice(indexArrow, 1);
+    const numList = [...Array(N)].map((_, i) => i + 1);
+    let indexArrow = 0;
+    const interval = K - 1;
+
+    while (numList.length !== 0) {
+      indexArrow = (indexArrow + interval) % numList.length;
+      result.push(numList[indexArrow]);
+      numList.splice(indexArrow, 1);
     }
 
     console.log(`<${result.join(", ")}>`);
