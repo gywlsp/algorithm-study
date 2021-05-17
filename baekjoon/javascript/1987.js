@@ -1,11 +1,16 @@
 //https://www.acmicpc.net/problem/1987
 
 const input = [];
-let graph, R, C;
-let result = 0;
+const strToNumArr = (str) => str.split(" ").map(Number);
+
+let graph,
+  R,
+  C,
+  len = 1,
+  result = 1;
+const visited = Array(26).fill(false);
 const dr = [-1, 1, 0, 0];
 const dc = [0, 0, -1, 1];
-const strToNumArr = (str) => str.split(" ").map(Number);
 
 require("readline")
   .createInterface(process.stdin, process.stdout)
@@ -14,12 +19,18 @@ require("readline")
   })
   .on("close", function () {
     [R, C] = strToNumArr(input.shift());
-    graph = input.map((str) => str.split(""));
-    dfs(0, 0, graph[0][0]);
+    graph = input.map((str) =>
+      str.split("").map((alphabet) => alphabet.charCodeAt(0) - 65)
+    );
+
+    dfs(0, 0);
     console.log(result);
   });
 
-const dfs = (currR, currC, alphabets) => {
+const dfs = (currR, currC) => {
+  const curr = graph[currR][currC];
+  visited[curr] = true;
+
   for (let i = 0; i < 4; i++) {
     const [nextR, nextC] = [currR + dr[i], currC + dc[i]];
     if (
@@ -27,11 +38,14 @@ const dfs = (currR, currC, alphabets) => {
       nextR >= R ||
       nextC < 0 ||
       nextC >= C ||
-      alphabets.includes(graph[nextR][nextC])
+      visited[graph[nextR][nextC]]
     ) {
-      result = Math.max(result, alphabets.length);
       continue;
     }
-    dfs(nextR, nextC, alphabets + graph[nextR][nextC]);
+    result = Math.max(result, ++len);
+    dfs(nextR, nextC);
   }
+
+  --len;
+  visited[curr] = false;
 };
