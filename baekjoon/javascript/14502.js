@@ -1,6 +1,15 @@
 //https://www.acmicpc.net/problem/14502
 
-const input = [];
+const input = [],
+  originalMap = [],
+  map = [],
+  virusMap = [];
+let R,
+  C,
+  result = 0;
+
+const dr = [-1, 0, 1, 0];
+const dc = [0, 1, 0, -1];
 
 const strToNumArr = (str) => str.split(" ").map(Number);
 
@@ -10,45 +19,93 @@ require("readline")
     input.push(line.trim());
   })
   .on("close", function () {
-    const [N, M] = strToNumArr(input.shift());
-    const visited = Array(N).fill(false);
-    const graph = visited.map(() => []);
-    const connectedV = new Set();
+    [R, C] = strToNumArr(input.shift());
     input.forEach((str) => {
-      const [u, v] = strToNumArr(str);
-      graph[u - 1].push(v - 1);
-      graph[v - 1].push(u - 1);
-      connectedV.add(v - 1);
-      connectedV.add(u - 1);
+      originalMap.push(strToNumArr(str));
+      map.push(Array(C).fill(0));
+      virusMap.push(Array(C).fill(0));
     });
+    pick(3);
+    console.log(result);
+  });
 
-    let count = 0;
-    for (let i = 0; i < N; i++) {
-      let start;
-      for (let j = i; j < N; j++) {
-        if (graph[j].length && !visited[j]) {
-          start = j;
-          break;
-        }
-      }
-      if (start === undefined) {
-        break;
-      }
+const initMap = () => {
+  for (let r = 0; r < R; r++) {
+    for (let c = 0; c < C; c++) {
+      map[r][c] = originalMap[r][c];
+    }
+  }
+};
 
-      count++;
-      const queue = [start];
-      visited[start] = true;
-      while (queue.length) {
-        const node = queue.shift();
-        graph[node].forEach((next) => {
-          if (visited[next]) {
-            return;
-          }
-          visited[next] = true;
-          queue.push(next);
-        });
+const initVirusMap = () => {
+  for (let r = 0; r < R; r++) {
+    for (let c = 0; c < C; c++) {
+      virusMap[r][c] = map[r][c];
+    }
+  }
+};
+
+const pick = (toPick) => {
+  if (toPick === 0) {
+    bfs();
+    return;
+  }
+  if (toPick === 3) {
+    initMap();
+  }
+  for (let r = 0; r < R; r++) {
+    for (let c = 0; c < C; c++) {
+      if (map[r][c]) {
+        continue;
+      }
+      map[r][c] = 1;
+      pick(toPick - 1);
+      map[r][c] = 0;
+    }
+  }
+};
+
+const bfs = () => {
+  initVirusMap();
+  const queue = [];
+  for (let r = 0; r < R; r++) {
+    for (let c = 0; c < C; c++) {
+      if (originalMap[r][c] === 2) {
+        queue.push([r, c]);
       }
     }
+  }
 
-    console.log(count + (N - connectedV.size));
-  });
+  while (queue.length) {
+    const [r, c] = queue.shift();
+    for (let i = 0; i < 4; i++) {
+      const nextR = r + dr[i];
+      const nextC = c + dc[i];
+      if (
+        nextR < 0 ||
+        nextR >= R ||
+        nextC < 0 ||
+        nextC >= C ||
+        virusMap[nextR][nextC]
+      ) {
+        continue;
+      }
+      virusMap[nextR][nextC] = 2;
+      queue.push([nextR, nextC]);
+    }
+  }
+
+  updateMaxSafetyArea();
+};
+
+const updateMaxSafetyArea = () => {
+  let count = 0;
+  for (let r = 0; r < R; r++) {
+    for (let c = 0; c < C; c++) {
+      if (!virusMap[r][c]) {
+        count++;
+      }
+    }
+  }
+  result = Math.max(result, count);
+};
