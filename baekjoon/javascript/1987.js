@@ -32,7 +32,8 @@ const dfs = (currR, currC) => {
   visited[curr] = true;
 
   for (let i = 0; i < 4; i++) {
-    const [nextR, nextC] = [currR + dr[i], currC + dc[i]];
+    const nextR = currR + dr[i];
+    const nextC = currC + dc[i];
     if (
       nextR < 0 ||
       nextR >= R ||
