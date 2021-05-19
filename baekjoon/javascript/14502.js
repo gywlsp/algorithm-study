@@ -3,7 +3,7 @@
 const input = [],
   originalMap = [],
   map = [],
-  virusMap = [];
+  infectedMap = [];
 let R,
   C,
   result = 0;
@@ -23,9 +23,9 @@ require("readline")
     input.forEach((str) => {
       originalMap.push(strToNumArr(str));
       map.push(Array(C).fill(0));
-      virusMap.push(Array(C).fill(0));
+      infectedMap.push(Array(C).fill(0));
     });
-    pick(3);
+    pickWall(3);
     console.log(result);
   });
 
@@ -37,15 +37,15 @@ const initMap = () => {
   }
 };
 
-const initVirusMap = () => {
+const initInfectedMap = () => {
   for (let r = 0; r < R; r++) {
     for (let c = 0; c < C; c++) {
-      virusMap[r][c] = map[r][c];
+      infectedMap[r][c] = map[r][c];
     }
   }
 };
 
-const pick = (toPick) => {
+const pickWall = (toPick) => {
   if (toPick === 0) {
     bfs();
     return;
@@ -59,14 +59,14 @@ const pick = (toPick) => {
         continue;
       }
       map[r][c] = 1;
-      pick(toPick - 1);
+      pickWall(toPick - 1);
       map[r][c] = 0;
     }
   }
 };
 
 const bfs = () => {
-  initVirusMap();
+  initInfectedMap();
   const queue = [];
   for (let r = 0; r < R; r++) {
     for (let c = 0; c < C; c++) {
@@ -86,11 +86,11 @@ const bfs = () => {
         nextR >= R ||
         nextC < 0 ||
         nextC >= C ||
-        virusMap[nextR][nextC]
+        infectedMap[nextR][nextC]
       ) {
         continue;
       }
-      virusMap[nextR][nextC] = 2;
+      infectedMap[nextR][nextC] = 2;
       queue.push([nextR, nextC]);
     }
   }
@@ -102,7 +102,7 @@ const updateMaxSafetyArea = () => {
   let count = 0;
   for (let r = 0; r < R; r++) {
     for (let c = 0; c < C; c++) {
-      if (!virusMap[r][c]) {
+      if (!infectedMap[r][c]) {
         count++;
       }
     }
