@@ -55,18 +55,13 @@ require("readline")
       copyMap(roomMap, temp);
     }
 
-    const sum = roomMap.reduce((acc, curr) => {
-      return (
-        acc +
-        curr.reduce((acc, curr) => {
-          if (curr > 0) {
-            return acc + curr;
-          }
-          return acc;
-        }, 0)
-      );
-    }, 0);
-    console.log(sum);
+    const dustAmount = roomMap.reduce(
+      (accumulator, currentValue) =>
+        accumulator +
+        currentValue.reduce((acc, curr) => (curr > 0 ? acc + curr : acc), 0),
+      0
+    );
+    console.log(dustAmount);
   });
 
 const copyMap = (from, to) => {
