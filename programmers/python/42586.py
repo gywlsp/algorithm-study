@@ -1,15 +1,19 @@
-def solution(progresses, speeds):
-    answer = []
-    while progresses:
-        deployFuncCnt=0
-        for i, speed in enumerate(speeds):
-            progresses[i] += speed
-        for progress in progresses:
-            if progress<100:
-                break;
-            deployFuncCnt+=1
-        if deployFuncCnt:
-            answer.append(deployFuncCnt)
-            progresses=progresses[deployFuncCnt:]
-            speeds=speeds[deployFuncCnt:]
-    return answer
+from collections import deque
+
+def solution(priorities, location):
+    priorities = deque(priorities)
+    isMine = deque([False] * len(priorities))
+    isMine[location] = True
+    
+    t = 1
+    while True:
+        if priorities[0] == max(priorities):
+            if isMine[0]:
+                return t
+            else:
+                priorities.popleft()
+                isMine.popleft()
+                t += 1
+        else:
+            priorities.rotate(-1)
+            isMine.rotate(-1)
