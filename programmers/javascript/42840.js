@@ -17,5 +17,5 @@ function solution(answers) {
 
   return rightCounts
     .map((_, i) => i + 1)
-    .filter((n, i) => rightCounts[i] === maxRightCount);
+    .filter((_, i) => rightCounts[i] === maxRightCount);
 }
