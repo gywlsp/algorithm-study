@@ -1,18 +1,16 @@
 function solution(numbers, target) {
   let answer = 0;
-  for (let i = 0; i < 1 << numbers.length; i++) {
-    let iBinaryStr = i.toString(2);
-    let t = numbers.length - iBinaryStr.length;
-    while (t--) {
-      iBinaryStr = "0" + iBinaryStr;
+  const evalCases = (sum, i) => {
+    if (i === numbers.length) {
+      if (sum === target) {
+        answer += 1;
+      }
+      return;
     }
-    let evalStr = "";
-    numbers.forEach((n, i) => {
-      evalStr = (iBinaryStr[i] === "1" ? "+" : "-") + n + evalStr;
-    });
-    if (eval(evalStr) === target) {
-      answer++;
-    }
-  }
+    const number = numbers[i];
+    evalCases(sum + number, i + 1);
+    evalCases(sum - number, i + 1);
+  };
+  evalCases(0, 0);
   return answer;
 }
