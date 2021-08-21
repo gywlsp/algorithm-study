@@ -10,18 +10,12 @@ require("readline")
     input.push(line.trim());
   })
   .on("close", function () {
-    const N = +input[0];
     const A_ARR = strToNumArr(input[1]);
     const [B, C] = strToNumArr(input[2]);
-    let result = 0;
-    A_ARR.forEach((a) => {
-      a -= B;
-      let needCnt = 1;
-      while (a > 0) {
-        a -= C;
-        needCnt++;
-      }
-      result += needCnt;
-    });
+    const memo = Array(1000001).fill(1);
+    for (let i = B + 1; i <= 1000000; i++) {
+      memo[i] = (memo[i - C] || 1) + 1;
+    }
+    const result = A_ARR.reduce((acc, curr) => acc + memo[curr], 0);
     console.log(result);
   });
