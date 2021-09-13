@@ -10,7 +10,6 @@ require("readline")
   .on("close", function () {
     let i = 0;
     const N = +input[i++];
-    const distributors = input[N + 2].split(" ").map(Number);
     const result = Array(N + 1).fill(-1);
     const adjList = Array(N + 1).fill(null);
     const turn = Array(N + 1).fill(0);
@@ -24,11 +23,12 @@ require("readline")
       });
       turn[i] = Math.ceil(adjList[i].length / 2);
     }
+
+    const distributors = input[++i].split(" ").map(Number);
     distributors.forEach((v) => {
       result[v] = 0;
     });
 
-    let t = 1;
     while (distributors.length) {
       const curr = distributors.shift();
       adjList[curr].forEach((next) => {
