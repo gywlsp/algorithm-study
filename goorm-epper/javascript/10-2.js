@@ -6,8 +6,8 @@ require("readline")
     input.push(line.trim());
   })
   .on("close", function () {
-    str = input[0];
-    let cnt = 0,
+    let str = input[0],
+      cnt = 0,
       result = 0;
     for (let i = 0; i <= str.length; i++) {
       if (str[i] === "O") {
