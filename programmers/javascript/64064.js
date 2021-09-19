@@ -32,10 +32,3 @@ function solution(user_id, banned_id) {
   solve([]);
   return answerSet.size;
 }
-
-console.log(
-  solution(
-    ["frodo", "fradi", "crodo", "abc123", "frodoc"],
-    ["*rodo", "*rodo", "******"]
-  )
-);
