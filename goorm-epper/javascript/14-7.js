@@ -1,7 +1,7 @@
 const input = [],
   words = [];
 
-function solution(r, c, zr, zc, words) {
+function solution(zr, zc, words) {
   let answer = [];
 
   //코드를 작성해주세요.
@@ -27,12 +27,11 @@ require("readline")
   })
   .on("close", function () {
     const [r, c, zr, zc] = input[0].split(" ");
-
     for (let i = 1; i <= r; i++) {
       words.push(input[i].split(""));
     }
 
-    const answer = solution(r, c, zr, zc, words);
+    const answer = solution(zr, zc, words);
     console.log(answer.join("\n"));
     process.exit();
   });
