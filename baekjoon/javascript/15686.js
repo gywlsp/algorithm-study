@@ -64,11 +64,10 @@ const solve = ({
 
 const getCityCDist = ({ houses, cHouses, cIndexCombination }) => {
   const result = houses.reduce((acc, [row, col]) => {
-    let minD = Number.MAX_SAFE_INTEGER;
-    cIndexCombination.forEach((i) => {
+    const minD = cIndexCombination.reduce((acc, i) => {
       const [r, c] = cHouses[i];
-      minD = Math.min(minD, Math.abs(row - r) + Math.abs(col - c));
-    });
+      return Math.min(acc, Math.abs(row - r) + Math.abs(col - c));
+    }, Number.MAX_SAFE_INTEGER);
     return acc + minD;
   }, 0);
   return result;
