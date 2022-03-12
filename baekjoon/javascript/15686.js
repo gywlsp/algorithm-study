@@ -47,8 +47,7 @@ const solve = ({
     return cityCDist;
   }
   let minCityCDist = Number.MAX_SAFE_INTEGER;
-  for (let i = startIndex; i < cHouses.length; i++) {
-    if (i > cHouses.length - toSelect) break;
+  for (let i = startIndex; i <= cHouses.length - toSelect; i++) {
     minCityCDist = Math.min(
       minCityCDist,
       solve({
