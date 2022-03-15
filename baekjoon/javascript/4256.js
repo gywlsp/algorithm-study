@@ -34,25 +34,24 @@ require("readline")
       end,
     }) {
       for (let i = start; i < end; i++) {
-        if (inOrderResult[i] === preOrderResult[root]) {
-          postOrder({
-            postOrderResult,
-            preOrderResult,
-            root: root + 1,
-            inOrderResult,
-            start,
-            end: i,
-          });
-          postOrder({
-            postOrderResult,
-            preOrderResult,
-            root: root + 1 + i - start,
-            inOrderResult,
-            start: i + 1,
-            end,
-          });
-          postOrderResult.push(inOrderResult[i]);
-        }
+        if (inOrderResult[i] !== preOrderResult[root]) continue;
+        postOrder({
+          postOrderResult,
+          preOrderResult,
+          root: root + 1,
+          inOrderResult,
+          start,
+          end: i,
+        });
+        postOrder({
+          postOrderResult,
+          preOrderResult,
+          root: root + 1 + i - start,
+          inOrderResult,
+          start: i + 1,
+          end,
+        });
+        postOrderResult.push(inOrderResult[i]);
       }
     }
   });
