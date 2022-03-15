@@ -16,7 +16,7 @@ require("readline")
       postOrder({
         postOrderResult: results[i],
         preOrderResult,
-        root: 0,
+        preOrderRoot: 0,
         inOrderResult,
         start: 0,
         end: N,
@@ -28,30 +28,37 @@ require("readline")
     function postOrder({
       postOrderResult,
       preOrderResult,
-      root,
+      preOrderRoot,
       inOrderResult,
       start,
       end,
     }) {
+      let inOrderRoot = -1;
       for (let i = start; i < end; i++) {
-        if (inOrderResult[i] !== preOrderResult[root]) continue;
-        postOrder({
-          postOrderResult,
-          preOrderResult,
-          root: root + 1,
-          inOrderResult,
-          start,
-          end: i,
-        });
-        postOrder({
-          postOrderResult,
-          preOrderResult,
-          root: root + 1 + i - start,
-          inOrderResult,
-          start: i + 1,
-          end,
-        });
-        postOrderResult.push(inOrderResult[i]);
+        if (inOrderResult[i] === preOrderResult[preOrderRoot]) {
+          inOrderRoot = i;
+          break;
+        }
       }
+      if (inOrderRoot === -1) {
+        return;
+      }
+      postOrder({
+        postOrderResult,
+        preOrderResult,
+        preOrderRoot: preOrderRoot + 1,
+        inOrderResult,
+        start,
+        end: inOrderRoot,
+      });
+      postOrder({
+        postOrderResult,
+        preOrderResult,
+        preOrderRoot: preOrderRoot + inOrderRoot - start + 1,
+        inOrderResult,
+        start: inOrderRoot + 1,
+        end,
+      });
+      postOrderResult.push(inOrderResult[inOrderRoot]);
     }
   });
