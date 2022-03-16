@@ -42,10 +42,8 @@ function isCorrect(str) {
   for (let i = 0; i < str.length; i++) {
     if (str[i] === "(") {
       stack.push("(");
-    } else {
-      if (stack[stack.length - 1] === "(") {
-        stack.pop();
-      }
+    } else if (stack[stack.length - 1] === "(") {
+      stack.pop();
     }
   }
   return !stack.length;
