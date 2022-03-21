@@ -17,8 +17,8 @@ function solution(numbers, hand) {
 
   const getDist = (a, b) => {
     return (
-      Math.abs((a % 3) - (b % 3)) +
-      Math.abs(Math.floor(a / 3) - Math.floor(b / 3))
+      Math.abs(((a - 1) % 3) - ((b - 1) % 3)) +
+      Math.abs(Math.floor((a - 1) / 3) - Math.floor((b - 1) / 3))
     );
   };
 
@@ -33,8 +33,8 @@ function solution(numbers, hand) {
       return acc + select(curr, "right");
     }
 
-    const lDist = getDist(curr - 1, leftHand - 1),
-      rDist = getDist(curr - 1, rightHand - 1);
+    const lDist = getDist(curr, leftHand),
+      rDist = getDist(curr, rightHand);
     if (lDist < rDist) {
       return acc + select(curr, "left");
     }
