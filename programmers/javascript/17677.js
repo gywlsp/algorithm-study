@@ -19,10 +19,13 @@ const getWordSet = (str) => {
 };
 
 const getResult = (set1, set2) => {
-  const intersectionCount = set1.reduce(
-    (acc, curr) => (set2.includes(curr) ? acc + 1 : acc),
-    0
-  );
-  const unionCount = set1.length + set2.length - intersectionCount;
+  let unionCount = set1.length + set2.length;
+  const intersectionCount = set1.reduce((acc, word1) => {
+    const index = set2.findIndex((word2) => word2 === word1);
+    if (index === -1) return acc;
+    set2.splice(index, 1);
+    return acc + 1;
+  }, 0);
+  unionCount -= intersectionCount;
   return Math.floor((intersectionCount / unionCount) * 65536);
 };
