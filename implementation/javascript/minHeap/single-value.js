@@ -30,7 +30,7 @@ class MinHeap {
     while (true) {
       const leftI = i * 2 + 1,
         rightI = i * 2 + 2;
-      if (leftI >= this.heap.size) {
+      if (leftI >= this.heap.length) {
         break;
       }
       let nextI = i;
