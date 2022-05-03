@@ -5,13 +5,15 @@ function solution(expression) {
     return acc;
   }, new Set());
   const operatorPermutations = getPermutations([...operatorSet]);
-  let answer = 0;
-  operatorPermutations.forEach((priority) => {
-    answer = Math.max(
-      answer,
-      Math.abs(calculate(numbers.map(Number), [...operators], priority))
-    );
-  });
+  const answer = operatorPermutations.reduce(
+    (prev, priority) =>
+      Math.max(
+        prev,
+        Math.abs(calculate(numbers.map(Number), [...operators], priority))
+      ),
+    0
+  );
+
   return answer;
 }
 
