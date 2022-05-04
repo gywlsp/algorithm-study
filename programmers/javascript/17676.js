@@ -16,7 +16,6 @@ const solution = (lines) => {
   }
 
   logPoints.sort((a, b) => a - b);
-  console.log(logPoints);
 
   for (let i = 0; i < logPoints.length; i++) {
     const startRange = logPoints[i];
