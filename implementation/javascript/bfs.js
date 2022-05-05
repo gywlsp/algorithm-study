@@ -15,9 +15,9 @@ const result = [];
 //큐
 const bfs = (graph, start, visited) => {
   const queue = [start];
+  visited[start] = true;
   while (queue.length) {
     const v = queue.shift();
-    visited[v] = true;
     result.push(v);
     graph[v].forEach((u) => {
       if (!visited[u]) {
