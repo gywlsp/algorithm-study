@@ -8,60 +8,26 @@ require("readline")
     input.push(line.trim());
   })
   .on("close", function () {
-    const N = Number(input[0]);
-    const numbers = strToNumArr(input[1]);
-    const searchNumbers = strToNumArr(input[3]);
-    quickSort(numbers, 0, N - 1);
-
-    const result = [];
-    searchNumbers.forEach((n) => {
-      result.push(binarySearch(n, numbers, 0, N - 1));
-    });
-
+    const NUMBERS = input[1]
+      .split(" ")
+      .map(Number)
+      .sort((a, b) => a - b);
+    const result = input[3]
+      .split(" ")
+      .map((n) => isIncluded(NUMBERS, +n, 0, NUMBERS.length - 1));
     console.log(result.join("\n"));
   });
 
-const quickSort = (numbers, start, end) => {
-  if (start >= end) {
-    return;
-  }
-  const pivot = start;
-  let left = start + 1,
-    right = end;
-  while (left <= right) {
-    while (left <= end && numbers[left] <= numbers[pivot]) {
-      left++;
-    }
-    while (right > start && numbers[right] >= numbers[pivot]) {
-      right--;
-    }
-    if (left <= right) {
-      let temp = numbers[left];
-      numbers[left] = numbers[right];
-      numbers[right] = temp;
+const isIncluded = (numbers, target, start, end) => {
+  while (start <= end) {
+    const mid = Math.floor((start + end) / 2);
+    if (numbers[mid] === target) {
+      return 1;
+    } else if (numbers[mid] > target) {
+      end = mid - 1;
     } else {
-      let temp = numbers[right];
-      numbers[right] = numbers[pivot];
-      numbers[pivot] = temp;
+      start = mid + 1;
     }
   }
-  quickSort(numbers, start, right - 1);
-  quickSort(numbers, right + 1, end);
-};
-
-const binarySearch = (num, numbers, startIndex, endIndex) => {
-  if (endIndex < startIndex) {
-    return 0;
-  }
-  if (endIndex === startIndex) {
-    return num === numbers[startIndex] ? 1 : 0;
-  }
-
-  const pivotIndex = Math.floor((endIndex + startIndex) / 2);
-  if (num === numbers[pivotIndex]) {
-    return 1;
-  }
-  return num > numbers[pivotIndex]
-    ? binarySearch(num, numbers, pivotIndex + 1, endIndex)
-    : binarySearch(num, numbers, startIndex, pivotIndex - 1);
+  return 0;
 };
